@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listify</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="app-header">
+        <h1>Listify</h1>
+        <button id="openAddModalBtn" class="primary-btn">Add Task</button>
+      </header>
+
+      <main class="board">
+        <section class="column" data-section="all">
+          <div class="column-header all">
+            <h2>All</h2>
+          </div>
+          <ul class="task-list" id="list-all"></ul>
+        </section>
+
+        <section class="column" data-section="active">
+          <div class="column-header active">
+            <h2>Active</h2>
+          </div>
+          <ul class="task-list" id="list-active"></ul>
+        </section>
+
+        <section class="column" data-section="completed">
+          <div class="column-header completed">
+            <h2>Completed</h2>
+          </div>
+          <ul class="task-list" id="list-completed"></ul>
+        </section>
+      </main>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div
+      class="modal hidden"
+      id="taskModal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="modalTitle">Add Task</h3>
+          <button class="icon-btn" id="closeModalBtn" aria-label="Close">
+            ✕
+          </button>
+        </div>
+        <form id="taskForm">
+          <input type="hidden" id="taskId" />
+          <div class="form-row">
+            <label for="title">Title</label>
+            <input
+              id="title"
+              name="title"
+              type="text"
+              placeholder="Task title"
+              required
+            />
+          </div>
+          <div class="form-row">
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              placeholder="Task details"
+              required
+            ></textarea>
+          </div>
+          <div class="form-row">
+            <label for="dueDate">Due date</label>
+            <input id="dueDate" name="dueDate" type="date" required />
+          </div>
+          <div class="form-actions">
+            <button type="button" class="secondary-btn" id="cancelModalBtn">
+              Cancel
+            </button>
+            <button type="submit" class="primary-btn" id="saveTaskBtn">
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Details Modal -->
+    <div
+      class="modal hidden"
+      id="detailsModal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Task Details</h3>
+          <button class="icon-btn" id="closeDetailsBtn" aria-label="Close">
+            ✕
+          </button>
+        </div>
+        <div id="detailsBody"></div>
+        <div class="form-actions">
+          <button type="button" class="secondary-btn" id="detailsCloseAction">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirm Delete Modal -->
+    <div
+      class="modal hidden"
+      id="confirmModal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Confirm deletion</h3>
+          <button class="icon-btn" id="closeConfirmBtn" aria-label="Close">
+            ✕
+          </button>
+        </div>
+        <div id="confirmBody">Are you sure you want to delete this task?</div>
+        <div class="form-actions">
+          <button type="button" class="secondary-btn" id="cancelConfirmBtn">
+            Cancel
+          </button>
+          <button type="button" class="primary-btn" id="confirmDeleteBtn">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toasts -->
+    <div
+      id="toastContainer"
+      class="toast-container"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
